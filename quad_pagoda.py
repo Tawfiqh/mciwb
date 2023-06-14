@@ -3,10 +3,10 @@ class PagodaBuilder:
         # Constructor (optional)
         self.player_pos = player_pos
 
-
-    def auto_build_pagodas_around_player(self, offset_int = 20):
+    # List of materials here: https://github.com/conqp/mcipc/blob/master/mcipc/rcon/item.py
+    def make_castle(self, offset = 20, material=Item.GOLD_BLOCK):
         player_pos = self.player_pos
-        def build_pagoda(pos, width=4, floor_height=4, item: Item = Item.GOLD_BLOCK):
+        def build_pagoda(pos, width=4, floor_height=4, item: Item = material):
             """
             Create a pagoda out of blocks at the given position.
 
@@ -56,15 +56,19 @@ class PagodaBuilder:
                 )
 
 
-        def build_pagoda_at_offset_from_player(offset_x=0, offset_y=0, offset_z=0, player_pos=player_pos):
+        def pagoda_at_offset_from_player(offset_x=0, offset_y=0, offset_z=0, player_pos=player_pos, width=10):
             pagoda_pos=Vec3(offset_x, offset_y, offset_z)
-            build_pagoda(player_pos + pagoda_pos, width=10)
+            build_pagoda(player_pos + pagoda_pos, width=width)
 
-        build_pagoda_at_offset_from_player(offset_int,0, offset_int)
-        build_pagoda_at_offset_from_player(offset_int, 0, offset_int * -1)
-        build_pagoda_at_offset_from_player(offset_int * -1, 0, offset_int)
-        build_pagoda_at_offset_from_player(offset_int * -1, 0, offset_int * -1)
+        pagoda_at_offset_from_player(offset,0, offset)
+        pagoda_at_offset_from_player(offset, 0, offset * -1)
+        pagoda_at_offset_from_player(offset * -1, 0, offset)
+        pagoda_at_offset_from_player(offset * -1, 0, offset * -1)
+        pagoda_at_offset_from_player(offset * -1, 0, offset * -1)
+        pagoda_at_offset_from_player(width=30)
+
+
 
 
 pb = PagodaBuilder(world.player.pos)
-pb.auto_build_pagodas_around_player()
+pb.make_castle(material=Item.DIAMOND_BLOCK)

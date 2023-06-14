@@ -8,3 +8,7 @@ Pre-requisites:
 
 Run start.sh
 Paste scripts into the interactive Python shell (is there an easier way to run them? TBC)
+
+## Notes:
+- List of materials here: https://github.com/conqp/mcipc/blob/master/mcipc/rcon/item.py
+
